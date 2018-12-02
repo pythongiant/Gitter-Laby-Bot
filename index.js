@@ -9,7 +9,7 @@ module.exports = app => {
   app.log('Labyrinth Gitter bot')
 
   app.on('issues.opened', async context => {
-    const issueComment = context.issue({ body: 'Thanks for opening this issue! I hope you have used the issue templates given here https://github.com/fossasia/labyrinth/tree/master/.github' })
+    
     request({
       url : "https://api.gitter.im/v1/rooms/"+room+"/chatMessages?access_token="+token,
       method: "POST",
@@ -25,10 +25,10 @@ module.exports = app => {
       },
       json: true,
     });
-  return context.github.issues.createComment(issueComment);
+  
   });
   app.on('pull_request.opened', async context => {
-    const issueComment = context.issue({ body: 'Thanks for opening making a PR. I hope you have read the guidelines at https://blog.fossasia.org/open-source-developer-guide-and-best-practices-at-fossasia/' })
+   
     request({
       url : "https://api.gitter.im/v1/rooms/"+room+"/chatMessages?access_token="+token,
       method: "POST",
@@ -44,6 +44,6 @@ module.exports = app => {
       },
       json: true,
     });
-    return context.github.issues.createComment(issueComment)
+    
   })
 }
